@@ -1,25 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import RestService from './RestService.js';
+import React from 'react';
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {message: ''};
+  }
+  async componentDidMount() {
+    let message = await RestService.get()
+    this.setState({message:message });
+  }
+  render(){
+    return (
+      <div className="App">
+        <p>{this.state.message}</p>
+      </div>
+    );
+  }
 }
 
-export default App;
