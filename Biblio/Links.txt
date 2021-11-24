@@ -1,0 +1,20 @@
+[1]M. Mena, A. Corral, L. Iribarne, et J. Criado, « A Progressive Web Application Based on Microservices Combining Geospatial Data and the Internet of Things », IEEE Access, vol. 7, p. 104577‑104590, 2019, doi: 10.1109/ACCESS.2019.2932196.
+[1]J. Saring, « 11 Micro Frontends Frameworks You Should Know », Medium, nov. 18, 2020. https://itnext.io/11-micro-frontends-frameworks-you-should-know-b66913b9cd20 (consulté le nov. 24, 2021).
+[1]« Micro Frontends », martinfowler.com. https://martinfowler.com/articles/micro-frontends.html (consulté le nov. 24, 2021).
+
+
+Donnez un Microfrontend à vos Microservices: https://medium.com/@ylerjen/donnez-un-microfrontend-%C3%A0-vos-microservices-f6c422b2bb46
+
+
+
+Microfrontends: An approach to building Scalable Web Apps:https://medium.com/@areai51/microfrontends-an-approach-to-building-scalable-web-apps-e8678e2acdd6
+
+
+
+
+
+Micro Frontend Architecture: https://levelup.gitconnected.com/micro-frontend-architecture-794442e9b325
+
+
+
+
