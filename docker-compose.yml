@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  # Service Example
+  back-example:
+    build: services/example
+    environment:
+      - PORT=${BACK_EXAMPLE_PORT}
+    ports:
+      - "${BACK_EXAMPLE_PORT}:${BACK_EXAMPLE_PORT}"
+    restart: unless-stopped
+
+  # Frontend Example
+  front-example:
+    build: frontends/example
+    environment:
+      - PORT=${FRONT_EXAMPLE_PORT}
+    ports:
+      - "${FRONT_EXAMPLE_PORT}:${FRONT_EXAMPLE_PORT}"
+    depends_on:
+      - back-example
+    restart: unless-stopped
+
+  # Service Example-bis
+  back-example-bis:
+    build: services/example-bis
+    environment:
+      - PORT=${BACK_EXAMPLE_BIS_PORT}
+    ports:
+      - "${BACK_EXAMPLE_BIS_PORT}:${BACK_EXAMPLE_BIS_PORT}"
+    restart: unless-stopped
+
+  # Frontend Example-bis
+  front-example-bis:
+    build: frontends/example-bis
+    environment:
+      - PORT=${FRONT_EXAMPLE_BIS_PORT}
+    ports:
+      - "${FRONT_EXAMPLE_BIS_PORT}:${FRONT_EXAMPLE_BIS_PORT}"
+    depends_on:
+      - back-example-bis
+    restart: unless-stopped
