@@ -1,23 +1,19 @@
 #Pull light alpine image
 FROM node:14-alpine
 
-#Defines our working directory and copy our defined dependencies
+
+# A directory within the virtualized Docker environment
+# Becomes more relevant when using Docker Compose later
 WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
 
-#Install our dependencies
-RUN npm install --silent --no-progress --no-audit --no-optional --no-fund
-#Install an additional dependency for deployment purpose (Cf: Deploygment guide for a React App)
-RUN npm install -g serve
+# Copies package.json and package-lock.json to Docker environment
+COPY package*.json ./
 
-#Copy full content
+# Installs all node packages
+RUN npm install
+
+# Copies everything over to Docker environment
 COPY . .
 
-#Build the production app
-RUN npm run build
-
-#Start the app in Dev Mode ! To change for production
-#CMD ["npm", "start"]
-
-#Start the app in Production mode
-CMD ["serve", "-s", "build"]
+# Finally runs the application
+CMD [ "npm", "start" ]
