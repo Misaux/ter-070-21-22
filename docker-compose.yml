@@ -40,3 +40,12 @@ services:
     depends_on:
       - back-example-bis
     restart: unless-stopped
+
+  # Frontend Example-bis
+  readers-interface:
+    build: services/readers-interface
+    environment:
+      - PORT=${BACK_READERS_PORT}
+    ports:
+      - "${BACK_READERS_PORT}:${BACK_READERS_PORT}"
+    restart: unless-stopped

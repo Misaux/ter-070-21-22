@@ -12,9 +12,9 @@ export default class App extends React.Component {
   }
   render(){
     return (
-      <div className="App">
-        <p>{this.state.message}</p>
-      </div>
+        <div className="App">
+          <p>{this.state.message}</p>
+        </div>
     );
   }
 }
