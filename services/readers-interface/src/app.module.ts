@@ -6,6 +6,7 @@ import Configuration from './config/configuration';
 import { ReaderImageService } from './services/reader-image.service';
 import { ReaderAudioService } from './services/reader-audio.service';
 import { ReaderVideoService } from './services/reader-video.service';
+import { RenderGateway } from './websocket/render.gateway';
 
 @Module({
   imports: [
@@ -21,6 +22,9 @@ import { ReaderVideoService } from './services/reader-video.service';
       ReaderImageService,
       ReaderAudioService,
       ReaderVideoService,
+    // WebSocketGateway
+      RenderGateway,
+      
   ],
 })
 export class AppModule {}
