@@ -7,9 +7,11 @@ import { ReaderImageService } from './services/reader-image.service';
 import { ReaderAudioService } from './services/reader-audio.service';
 import { ReaderVideoService } from './services/reader-video.service';
 import { RenderGateway } from './websocket/render.gateway';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
+      HttpModule,
     // Configuration.
     ConfigModule.forRoot({
       load: [Configuration],
