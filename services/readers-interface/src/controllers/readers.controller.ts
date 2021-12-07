@@ -7,7 +7,8 @@ import {RenderGateway} from 'src/websocket/render.gateway';
 import {EntryPointDTO} from '../dtos/entry.dto';
 import {FileFormat} from '../utils/file-format.util';
 import { DataRetriever } from '../services/retrieve-data.service';
-import {HtmlObjectDto} from "../dtos/html-object.dto";
+import { HtmlObjectDto } from '../dtos/html-object.dto';
+import { v4 as uuidv4 } from 'uuid' //Random uuid generator
 
 @Controller()
 export class ReadersController {
@@ -27,10 +28,17 @@ export class ReadersController {
 
   @Post('/new')
   async getConfigFromUser(@Body() request: EntryPointDTO) {
+    let resultTags: string
     console.log(request);
 
+    //Retrieve Data from the service of the user (url given in the JSON)
+    const response: string = await this.dataRetriever.getDataFromService(request);
+    console.log(response);
+
+    //Create corresponding tags according to the format and strategy
     switch (request.fileFormat){
       case FileFormat.TEXT:
+        resultTags = this.readerTextService.createTags(response);
         break;
       case FileFormat.IMAGE:
         break;
@@ -40,8 +48,13 @@ export class ReadersController {
         break;
     }
 
-    const response = await this.dataRetriever.getDataFromService(request);
-    console.log(response);
+    //Send data to the gateway for the front-end
+    console.log(resultTags);
+    const hmtlResDto: HtmlObjectDto = {
+      id: uuidv4(), //v4: Create a random unique uuid
+      html: resultTags,
+    }
+    await this.gatewayWebSocket.render(hmtlResDto);
   }
 
   @Post()
