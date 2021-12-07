@@ -8,6 +8,7 @@ import { ReaderAudioService } from './services/reader-audio.service';
 import { ReaderVideoService } from './services/reader-video.service';
 import { RenderGateway } from './websocket/render.gateway';
 import { HttpModule } from '@nestjs/axios';
+import { DataRetriever } from './services/retrieve-data.service';
 
 @Module({
   imports: [
@@ -24,9 +25,9 @@ import { HttpModule } from '@nestjs/axios';
       ReaderImageService,
       ReaderAudioService,
       ReaderVideoService,
+      DataRetriever,
     // WebSocketGateway
       RenderGateway,
-      
   ],
 })
 export class AppModule {}

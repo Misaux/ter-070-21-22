@@ -6,7 +6,8 @@ import {ReaderVideoService} from '../services/reader-video.service';
 import {RenderGateway} from 'src/websocket/render.gateway';
 import {EntryPointDTO} from '../dtos/entry.dto';
 import {FileFormat} from '../utils/file-format.util';
-import { HtmlObjectDto } from 'src/dto/html-object.dto';
+import { DataRetriever } from '../services/retrieve-data.service';
+import {HtmlObjectDto} from "../dtos/html-object.dto";
 
 @Controller()
 export class ReadersController {
@@ -15,6 +16,7 @@ export class ReadersController {
               private readonly readerAudioService: ReaderAudioService,
               private readonly readerImageService: ReaderImageService,
               private readonly readerVideoService: ReaderVideoService,
+              private readonly dataRetriever: DataRetriever,
               private readonly gatewayWebSocket: RenderGateway
   ) {}
 
@@ -24,7 +26,7 @@ export class ReadersController {
   }
 
   @Post('/new')
-  getConfigFromUser(@Body() request: EntryPointDTO) {
+  async getConfigFromUser(@Body() request: EntryPointDTO) {
     console.log(request);
 
     switch (request.fileFormat){
@@ -37,6 +39,9 @@ export class ReadersController {
       case FileFormat.VIDEO:
         break;
     }
+
+    const response = await this.dataRetriever.getDataFromService(request);
+    console.log(response);
   }
 
   @Post()

@@ -8,7 +8,7 @@ export class EntryPointDTO{
 
     @IsNotEmpty()
     @IsString()
-    public address: string;
+    public url: string;
 
     @IsNotEmpty()
     @IsEnum(FileFormat)

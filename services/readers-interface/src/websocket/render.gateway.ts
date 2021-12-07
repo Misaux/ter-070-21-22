@@ -5,7 +5,7 @@ import {
     OnGatewayDisconnect,
   } from '@nestjs/websockets';
   import { Server } from 'socket.io';
-import { HtmlObjectDto } from 'src/dto/html-object.dto';
+import { HtmlObjectDto } from '../dtos/html-object.dto';
 
   @WebSocketGateway({
         cors: {
