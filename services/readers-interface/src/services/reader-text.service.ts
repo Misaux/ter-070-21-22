@@ -6,6 +6,6 @@ export class ReaderTextService {
     constructor() {}
 
     createTags(data: string) : string{
-        return "<p>" + data + "</p>"
+        return '<p>' + data + '</p>';
     }
 }

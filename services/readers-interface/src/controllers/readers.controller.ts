@@ -41,6 +41,7 @@ export class ReadersController {
         resultTags = this.readerTextService.createTags(response);
         break;
       case FileFormat.IMAGE:
+        resultTags = this.readerImageService.createTags(response);
         break;
       case FileFormat.AUDIO:
         break;
