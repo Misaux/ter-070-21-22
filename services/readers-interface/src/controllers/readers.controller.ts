@@ -6,6 +6,7 @@ import {ReaderVideoService} from '../services/reader-video.service';
 import {RenderGateway} from 'src/websocket/render.gateway';
 import {EntryPointDTO} from '../dtos/entry.dto';
 import {FileFormat} from '../utils/file-format.util';
+import { HtmlObjectDto } from 'src/dto/html-object.dto';
 
 @Controller()
 export class ReadersController {
@@ -39,7 +40,7 @@ export class ReadersController {
   }
 
   @Post()
-  postWebMessage() {
-    this.gatewayWebSocket.render("websocket message youpi");
+  postWebMessage(@Body() htmlObjectDto: HtmlObjectDto ) {
+    this.gatewayWebSocket.render(htmlObjectDto);
   }
 }

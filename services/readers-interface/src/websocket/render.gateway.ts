@@ -5,6 +5,7 @@ import {
     OnGatewayDisconnect,
   } from '@nestjs/websockets';
   import { Server } from 'socket.io';
+import { HtmlObjectDto } from 'src/dto/html-object.dto';
 
   @WebSocketGateway({
         cors: {
@@ -27,7 +28,7 @@ import {
       this.server.emit('users', this.users);
     }
 
-    async render(message) {
+    async render(message: HtmlObjectDto) {
       this.server.emit('render', message);
     }
   }
