@@ -31,21 +31,22 @@ export class ReadersController {
     let resultTags: string
     console.log(request);
 
-    //Retrieve Data from the service of the user (url given in the JSON)
-    const response: string = await this.dataRetriever.getDataFromService(request);
-    console.log(response);
+    // //Retrieve Data from the service of the user (url given in the JSON)
+    // const response: string = await this.dataRetriever.getDataFromService(request);
+    // console.log(response);
 
     //Create corresponding tags according to the format and strategy
     switch (request.fileFormat){
       case FileFormat.TEXT:
-        resultTags = this.readerTextService.createTags(response);
+        resultTags = this.readerTextService.createTags(await this.dataRetriever.getDataFromService(request));
         break;
       case FileFormat.IMAGE:
-        resultTags = this.readerImageService.createTags(response);
+        resultTags = this.readerImageService.createTags(await this.dataRetriever.getDataFromService(request));
         break;
       case FileFormat.AUDIO:
         break;
       case FileFormat.VIDEO:
+        resultTags = this.readerVideoService.createTags(request.url);
         break;
     }
 
