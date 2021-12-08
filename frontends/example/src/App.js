@@ -19,7 +19,7 @@ export default class App extends React.Component {
         <p>{this.state.message}</p>
 
         <video controls width="250">
-          <source src="https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"
+          <source src="http://localhost:3002/"
                   type="video/mp4"/>
           Your browser does not support the <code>video</code> element.
         </video>
@@ -27,7 +27,7 @@ export default class App extends React.Component {
         <figure>
           <figcaption>Listen to the bad taste:</figcaption>
           <audio controls
-            src="https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3">
+            src="http://localhost:3003/audio/sample-mp3-file.mp3">
             Your browser does not support the <code>audio</code> element.
           </audio>
         </figure>
