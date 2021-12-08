@@ -25,7 +25,7 @@ export default class App extends React.Component {
         </video>
 
         <figure>
-          <figcaption>Listen to the bad taste:</figcaption>
+          <figcaption>Listen to the good taste:</figcaption>
           <audio controls
             src="http://localhost:3003/audio/sample-mp3-file.mp3">
             Your browser does not support the <code>audio</code> element.
