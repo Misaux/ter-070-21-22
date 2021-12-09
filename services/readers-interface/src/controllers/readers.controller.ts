@@ -44,6 +44,7 @@ export class ReadersController {
         resultTags = this.readerImageService.createTags(await this.dataRetriever.getDataFromService(request));
         break;
       case FileFormat.AUDIO:
+        resultTags = this.readerAudioService.createTags(request.url);
         break;
       case FileFormat.VIDEO:
         resultTags = this.readerVideoService.createTags(request.url);
