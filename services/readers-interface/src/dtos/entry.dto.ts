@@ -1,16 +1,15 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { FileFormat } from '../utils/file-format.util';
+import { IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+import { ComponentDTO } from './component.dto';
 
 export class EntryPointDTO{
-    @IsNotEmpty()
-    @IsString()
-    public name: string;
 
     @IsNotEmpty()
     @IsString()
-    public url: string;
+    public keyword: string;
 
     @IsNotEmpty()
-    @IsEnum(FileFormat)
-    public fileFormat: FileFormat;
+    @ValidateNested( {each: true})
+    @Type(() => ComponentDTO)
+    public components: ComponentDTO[];
 }
