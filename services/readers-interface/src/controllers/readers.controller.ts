@@ -8,8 +8,7 @@ import { AggregatorService } from '../services/aggregator.service';
 @Controller()
 export class ReadersController {
 
-  constructor(
-              private readonly gatewayWebSocket: RenderGateway,
+  constructor(private readonly gatewayWebSocket: RenderGateway,
               private readonly aggregatorService: AggregatorService
   ) {}
 
@@ -23,7 +22,7 @@ export class ReadersController {
     let resultTags: string
     console.log(request);
 
-    resultTags = await this.aggregatorService.aggregate(request.components);
+    resultTags = await this.aggregatorService.aggregate(request);
 
     //Send data to the gateway for the front-end
     console.log(resultTags);

@@ -6,6 +6,7 @@ import { ReaderImageService } from './reader-image.service';
 import { ReaderVideoService } from './reader-video.service';
 import { DataRetriever } from './retrieve-data.service';
 import { ComponentDTO } from '../dtos/component.dto';
+import { EntryPointDTO } from '../dtos/entry.dto';
 
 @Injectable()
 export class AggregatorService {
@@ -17,11 +18,23 @@ export class AggregatorService {
                 private readonly dataRetriever: DataRetriever)
     {}
 
-    async aggregate(entries: ComponentDTO[]): Promise<string>{
+    async aggregate(entry: EntryPointDTO): Promise<string>{
+        //Parse keyword
+        switch (entry.keyword) {
+            case "merge_texts":
+                return await this.aggregate_merge_texts(entry.components);
+            case "text_over_images":
+                return await this.aggregate_text_over_images(entry.components);
+            default:
+                return await this.aggregate_generic(entry.components);
+        }
+    }
+
+    async aggregate_generic(components: ComponentDTO[]): Promise<string>{
         let resultTags: string = '';
 
         //Create corresponding tags according to the format and strategy
-        for(const elem of entries){
+        for(const elem of components){
             resultTags += '<div>'
             switch (elem.fileFormat){
                 case FileFormat.TEXT:
@@ -40,6 +53,37 @@ export class AggregatorService {
             resultTags += '</div>'
         }
 
+        return resultTags;
+    }
+
+    async aggregate_merge_texts(components: ComponentDTO[]): Promise<string>{
+        let resultTags: string = '<div>';
+        let resultText: string = '';
+
+        for(const elem of components){
+            resultText += await this.dataRetriever.getDataFromService(elem);
+            resultText += ' '; //Put a space in between texts
+        }
+
+        resultTags += this.readerTextService.createTags(resultText);
+        resultTags += '</div>';
+        return resultTags;
+    }
+
+    async aggregate_text_over_images(components: ComponentDTO[]): Promise<string>{
+        let resultTags: string = '<div>';
+
+        //The text HAS to be the first one in the order of components
+        let textTags: string = '<div>'+ (await this.dataRetriever.getDataFromService(components[0])) + '</div>';
+
+        for(const elem of components){
+            if(elem.fileFormat === FileFormat.IMAGE){ //Make sure we ignore components not being images
+                resultTags += this.readerImageService.createTags(await this.dataRetriever.getDataFromService(elem));
+                resultTags += textTags;
+            }
+        }
+
+        resultTags += '</div>';
         return resultTags;
     }
 }
