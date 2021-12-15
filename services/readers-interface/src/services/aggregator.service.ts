@@ -7,6 +7,7 @@ import { ReaderVideoService } from './reader-video.service';
 import { DataRetriever } from './retrieve-data.service';
 import { ComponentDTO } from '../dtos/component.dto';
 import { EntryPointDTO } from '../dtos/entry.dto';
+import { ReaderHTMLService } from './reader-html.service';
 
 @Injectable()
 export class AggregatorService {
@@ -15,6 +16,7 @@ export class AggregatorService {
                 private readonly readerAudioService: ReaderAudioService,
                 private readonly readerImageService: ReaderImageService,
                 private readonly readerVideoService: ReaderVideoService,
+                private readonly readerHTMLService: ReaderHTMLService,
                 private readonly dataRetriever: DataRetriever)
     {}
 
@@ -48,6 +50,9 @@ export class AggregatorService {
                     break;
                 case FileFormat.VIDEO:
                     resultTags += this.readerVideoService.createTags(elem.url);
+                    break;
+                case FileFormat.HTML:
+                    resultTags += this.readerHTMLService.createTags(elem.url);
                     break;
             }
             resultTags += '</div>'

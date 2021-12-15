@@ -10,6 +10,7 @@ import { RenderGateway } from './websocket/render.gateway';
 import { HttpModule } from '@nestjs/axios';
 import { DataRetriever } from './services/retrieve-data.service';
 import {AggregatorService} from "./services/aggregator.service";
+import { ReaderHTMLService } from './services/reader-html.service';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import {AggregatorService} from "./services/aggregator.service";
       ReaderImageService,
       ReaderAudioService,
       ReaderVideoService,
+      ReaderHTMLService,
       DataRetriever,
     // WebSocketGateway
       RenderGateway,
