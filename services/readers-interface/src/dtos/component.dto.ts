@@ -10,6 +10,7 @@ export class ComponentDTO{
     @IsNotEmpty()
     @IsString()
     public url: string;
+    
 
     @IsNotEmpty()
     @IsEnum(FileFormat)

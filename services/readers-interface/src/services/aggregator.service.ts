@@ -52,7 +52,8 @@ export class AggregatorService {
                     resultTags += this.readerVideoService.createTags(elem.url);
                     break;
                 case FileFormat.HTML:
-                    resultTags += this.readerHTMLService.createTags(elem.url);
+                    //var data = elem.url !== undefined ? await this.dataRetriever.getDataFromService(elem): elem.content;
+                    resultTags += this.readerHTMLService.createTags(await this.dataRetriever.getDataFromService(elem));
                     break;
             }
             resultTags += '</div>'
