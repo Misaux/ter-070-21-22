@@ -8,11 +8,13 @@ import { DataRetriever } from './retrieve-data.service';
 import { ComponentDTO } from '../dtos/component.dto';
 import { EntryPointDTO } from '../dtos/entry.dto';
 import { ReaderHTMLService } from './reader-html.service';
+import { ReaderTTSService } from './reader-tts.service';
 
 @Injectable()
 export class AggregatorService {
 
     constructor(private readonly readerTextService: ReaderTextService,
+                private readonly readerTTSService: ReaderTTSService,
                 private readonly readerAudioService: ReaderAudioService,
                 private readonly readerImageService: ReaderImageService,
                 private readonly readerVideoService: ReaderVideoService,
@@ -41,6 +43,9 @@ export class AggregatorService {
             switch (elem.fileFormat){
                 case FileFormat.TEXT:
                     resultTags += this.readerTextService.createTags(await this.dataRetriever.getDataFromService(elem));
+                    break;
+                case FileFormat.TTS:
+                    resultTags += this.readerTTSService.createTags(await this.dataRetriever.getDataFromService(elem));
                     break;
                 case FileFormat.IMAGE:
                     resultTags += this.readerImageService.createTags(await this.dataRetriever.getDataFromService(elem));

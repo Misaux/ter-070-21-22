@@ -9,8 +9,9 @@ import { ReaderVideoService } from './services/reader-video.service';
 import { RenderGateway } from './websocket/render.gateway';
 import { HttpModule } from '@nestjs/axios';
 import { DataRetriever } from './services/retrieve-data.service';
-import {AggregatorService} from "./services/aggregator.service";
+import { AggregatorService } from './services/aggregator.service';
 import { ReaderHTMLService } from './services/reader-html.service';
+import {ReaderTTSService} from "./services/reader-tts.service";
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ReaderHTMLService } from './services/reader-html.service';
   providers: [
     // Services.
       ReaderTextService,
+      ReaderTTSService,
       ReaderImageService,
       ReaderAudioService,
       ReaderVideoService,

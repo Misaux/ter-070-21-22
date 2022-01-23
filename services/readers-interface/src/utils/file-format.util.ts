@@ -3,5 +3,6 @@ export enum FileFormat{
     AUDIO = 'AUDIO',
     TEXT = 'TEXT',
     IMAGE = 'IMAGE',
-    HTML = 'HTML'
+    HTML = 'HTML',
+    TTS = 'TTS'
 }

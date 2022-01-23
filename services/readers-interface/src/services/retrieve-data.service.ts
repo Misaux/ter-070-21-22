@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { ComponentDTO } from '../dtos/component.dto';
 
 
@@ -10,9 +10,6 @@ export class DataRetriever {
     constructor(private httpService: HttpService) {}
 
     async getDataFromService(cmpDto: ComponentDTO){
-        const data = await this.httpService.get(cmpDto.url).pipe(map((response) => response.data));
-        return data.toPromise().then((value) => {
-            return value;
-        });
+        return ( await firstValueFrom(this.httpService.get(cmpDto.url)) ).data;
     }
 }

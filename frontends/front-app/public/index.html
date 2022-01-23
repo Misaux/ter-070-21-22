@@ -25,6 +25,29 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    <!-- <script src="../src/TextToSpeech.js"></script> -->
+    <script>
+      //Init
+      const synth = window.speechSynthesis;
+      const speechU = new SpeechSynthesisUtterance();
+      speechU.lang = "fr";
+      speechU.volume = 1;
+      speechU.pitch = 1;
+      speechU.rate = 1;
+      const voices = synth.getVoices();
+      speechU.voice = voices[0];
+
+      function speakTTS(textOfSpeech) {
+        if (synth.speaking) {
+          console.error('Currently speaking !');
+          return;
+        }
+        if (textOfSpeech !== '') {
+          speechU.text = textOfSpeech;
+          synth.speak(speechU);
+        }
+      }
+   </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
