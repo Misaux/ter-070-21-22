@@ -12,7 +12,18 @@ export default class AddRemoveLayout extends React.PureComponent {
   static defaultProps = {
     className: "layout",
     cols: {lg: 12, md: 10, sm: 6, xs: 4, xxs: 2},
-    rowHeight: 100
+    rowHeight: 50,
+    margin: [10,10],
+    onLayoutChange: function() {},
+    // This turns off compaction so you can place items wherever.
+    compactType: 'null',
+
+    // If true, grid can be placed one over the other.
+    // If set, implies `preventCollision`.
+    allowOverlap: true,
+
+    // If true, the container height swells and contracts to fit contents
+    autoSize: true
   };
 
   constructor(props) {
@@ -21,11 +32,12 @@ export default class AddRemoveLayout extends React.PureComponent {
     this.state = {
       items: [
         {
+          id:"0",
           layout: {
             i: 0,
             x: 0,
             y: 0,
-            w: 1,
+            w: 2,
             h: 1,
           },
           html: "<p> Start sending content for it to be shown here.</p>"
@@ -41,19 +53,12 @@ export default class AddRemoveLayout extends React.PureComponent {
     this.WebSocket()
   }
   createElement(item) {
-    const removeStyle = {
-      position: "absolute",
-      right: "2px",
-      top: 0,
-      cursor: "pointer"
-    };
     return (
-      <div key={item.layout.i} data-grid={item.layout}>
-        <div dangerouslySetInnerHTML={{__html: item.html}} />
+      <div key={item.id} data-grid={item.layout}>
+        <span dangerouslySetInnerHTML={{__html: item.html}} />
         <span
           className="remove"
-          style={removeStyle}
-          onClick={this.onRemoveItem.bind(this, item.layout.i)}
+          onClick={this.onRemoveItem.bind(this, item.id)}
         >
           x
         </span>
@@ -67,12 +72,12 @@ export default class AddRemoveLayout extends React.PureComponent {
       // Add a new item. It must have a unique key!
       items: this.state.items.concat(
         {
+          id: id,
           layout: {
-            i: id,
             x: (this.state.items.length * 2) % (this.state.cols || 12),
             y: Infinity, // puts it at the bottom
-            w: 2,
-            h: 2
+            w: 5,
+            h: 3
           },
           html: html
         }),
@@ -87,10 +92,14 @@ export default class AddRemoveLayout extends React.PureComponent {
     });
   }
 
+  onLayoutChange(layout) {
+    this.props.onLayoutChange(layout);
+    this.setState({ layout: layout });
+  }
 
   onRemoveItem(id) {
     console.log("removing", id);
-    this.setState({items: _.reject(this.state.items, {i: id})});
+    this.setState({items: _.reject(this.state.items, {id: id})});
   }
 
   WebSocket() {
