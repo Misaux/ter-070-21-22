@@ -12,10 +12,12 @@ function WebSocket() {
 
   useEffect(() => {
     const socket = socketIOClient(`http://${window.location.hostname}:3010`);
+    console.log("ici")
     socket.on("render", data => {
         setComponents(c => c.concat([createComponent(data)]));
         console.log(data);
       });
+      socket.emit("refresh",null);
       return () => socket.disconnect();
 
     }, []);

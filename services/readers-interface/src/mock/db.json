@@ -1,0 +1,12 @@
+[
+  {
+    "keyword": "RANDOM",
+    "components": [
+      {
+        "name": "div",
+        "url": "http://localhost:3000",
+        "fileFormat": "HTML"
+      }
+    ]
+  }
+]

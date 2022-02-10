@@ -12,6 +12,7 @@ import { DataRetriever } from './services/retrieve-data.service';
 import { AggregatorService } from './services/aggregator.service';
 import { ReaderHTMLService } from './services/reader-html.service';
 import {ReaderTTSService} from "./services/reader-tts.service";
+import { PersistanceService } from './services/persistance.service';
 
 @Module({
   imports: [
@@ -23,6 +24,8 @@ import {ReaderTTSService} from "./services/reader-tts.service";
   ],
   controllers: [ReadersController],
   providers: [
+    // WebSocketGateway
+      RenderGateway,
     // Services.
       ReaderTextService,
       ReaderTTSService,
@@ -31,10 +34,12 @@ import {ReaderTTSService} from "./services/reader-tts.service";
       ReaderVideoService,
       ReaderHTMLService,
       DataRetriever,
-    // WebSocketGateway
-      RenderGateway,
-      // Aggregation
+    // Aggregation
       AggregatorService,
+    // PersistanceService
+      PersistanceService,
+
   ],
+  
 })
 export class AppModule {}

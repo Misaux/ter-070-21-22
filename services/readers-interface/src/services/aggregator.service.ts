@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { FileFormat } from '../utils/file-format.util';
 import { ReaderTextService } from './reader-text.service';
 import { ReaderAudioService } from './reader-audio.service';
@@ -9,6 +9,10 @@ import { ComponentDTO } from '../dtos/component.dto';
 import { EntryPointDTO } from '../dtos/entry.dto';
 import { ReaderHTMLService } from './reader-html.service';
 import { ReaderTTSService } from './reader-tts.service';
+import { PersistanceService } from './persistance.service';
+import { RenderGateway } from '../websocket/render.gateway';
+import { HtmlObjectDto } from '../dtos/html-object.dto';
+import { v4 as uuidv4 } from 'uuid' //Random uuid generator
 
 @Injectable()
 export class AggregatorService {
@@ -19,8 +23,30 @@ export class AggregatorService {
                 private readonly readerImageService: ReaderImageService,
                 private readonly readerVideoService: ReaderVideoService,
                 private readonly readerHTMLService: ReaderHTMLService,
-                private readonly dataRetriever: DataRetriever)
+                private readonly dataRetriever: DataRetriever,
+                @Inject(forwardRef(() => RenderGateway))
+                private readonly gatewayWebSocket: RenderGateway,
+              private readonly persistenceService: PersistanceService)
     {}
+
+  
+    async renderAggregate(entry:EntryPointDTO){
+        let resultTags: string
+
+        resultTags = await this.aggregate(entry);
+
+        //Send data to the gateway for the front-end
+        console.log(resultTags);
+        const hmtlResDto: HtmlObjectDto = {
+        id: uuidv4(), //v4: Create a random unique uuid
+        html: resultTags,
+        }
+        await this.gatewayWebSocket.render(hmtlResDto);
+    }
+
+    async renderMultiAggregate(entries: EntryPointDTO[]){
+        entries.forEach((entry: EntryPointDTO) => this.renderAggregate(entry))
+    }
 
     async aggregate(entry: EntryPointDTO): Promise<string>{
         //Parse keyword

@@ -3,29 +3,37 @@ import {
     WebSocketServer,
     OnGatewayConnection,
     OnGatewayDisconnect,
+    SubscribeMessage,
+    MessageBody,
   } from '@nestjs/websockets';
   import { Server } from 'socket.io';
+import { AggregatorService } from '../services/aggregator.service';
+import { PersistanceService } from '../services/persistance.service';
 import { HtmlObjectDto } from '../dtos/html-object.dto';
-
+import { forwardRef, Inject } from '@nestjs/common';
   @WebSocketGateway({
         cors: {
           origin: '*',
         },
       })
   export class RenderGateway implements OnGatewayConnection, OnGatewayDisconnect {
+
+    constructor(                @Inject(forwardRef(() => AggregatorService))
+    private readonly aggregatorService: AggregatorService,
+      private readonly persistanceService: PersistanceService) {}
+
     @WebSocketServer() server:Server;
-    users: number = 0;
     async handleConnection() {
-      // A client has connected
-      this.users++;
-      // Notify connected clients of current users
-      this.server.emit('users', this.users);
+      console.log("websocket connected")
     }
     async handleDisconnect() {
-      // A client has disconnected
-      this.users--;
-      // Notify connected clients of current users
-      this.server.emit('users', this.users);
+      console.log("websocket disconnected")
+
+    }
+    @SubscribeMessage('refresh')
+    handleEvent(@MessageBody() data: any) {
+      console.log("page refresh")
+      this.aggregatorService.renderMultiAggregate(this.persistanceService.readData());
     }
 
     async render(message: HtmlObjectDto) {
