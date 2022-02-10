@@ -74,7 +74,7 @@ export class AggregatorService {
                     resultTags += this.readerTTSService.createTags(await this.dataRetriever.getDataFromService(elem));
                     break;
                 case FileFormat.IMAGE:
-                    resultTags += this.readerImageService.createTags(await this.dataRetriever.getDataFromService(elem));
+                    resultTags += this.readerImageService.createTags(elem.url);
                     break;
                 case FileFormat.AUDIO:
                     resultTags += this.readerAudioService.createTags(elem.url);

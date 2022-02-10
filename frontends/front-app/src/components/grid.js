@@ -37,7 +37,9 @@ export default class AddRemoveLayout extends React.PureComponent {
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
     this.socket = socketIOClient(`http://${window.location.hostname}:3010`);
   }
-
+  componentDidMount() {
+    this.WebSocket()
+  }
   createElement(item) {
     const removeStyle = {
       position: "absolute",
@@ -92,7 +94,6 @@ export default class AddRemoveLayout extends React.PureComponent {
   }
 
   WebSocket() {
-      //console.log("ici")
       this.socket.on("render", data => {
         this.addItem(data.id, data.html);
         console.log(data);
