@@ -65,7 +65,7 @@ export class AggregatorService {
 
         //Create corresponding tags according to the format and strategy
         for(const elem of components){
-            resultTags += '<div>'
+            resultTags += ''
             switch (elem.fileFormat){
                 case FileFormat.TEXT:
                     resultTags += this.readerTextService.createTags(await this.dataRetriever.getDataFromService(elem));
@@ -87,7 +87,7 @@ export class AggregatorService {
                     resultTags += this.readerHTMLService.createTags(await this.dataRetriever.getDataFromService(elem));
                     break;
             }
-            resultTags += '</div>'
+            resultTags += ''
         }
 
         return resultTags;

@@ -1,8 +1,8 @@
-import WebSocket from './components/WebSocket'
+import Grid from './components/grid'
 function App() {
   return (
     <div className="App">
-      <WebSocket/>
+      <Grid/>
     </div>
   );
 }
