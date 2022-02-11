@@ -2,6 +2,8 @@ import React from "react";
 import {Responsive, WidthProvider} from "react-grid-layout";
 import _ from "lodash";
 import socketIOClient from "socket.io-client";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -11,19 +13,11 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 export default class AddRemoveLayout extends React.PureComponent {
   static defaultProps = {
     className: "layout",
-    cols: {lg: 12, md: 10, sm: 6, xs: 4, xxs: 2},
+    cols: {lg: 20, md: 10, sm: 6, xs: 4, xxs: 2},
     rowHeight: 50,
-    margin: [10,10],
     onLayoutChange: function() {},
-    // This turns off compaction so you can place items wherever.
-    compactType: 'null',
-
-    // If true, grid can be placed one over the other.
-    // If set, implies `preventCollision`.
-    allowOverlap: true,
-
-    // If true, the container height swells and contracts to fit contents
     autoSize: true
+
   };
 
   constructor(props) {
@@ -31,17 +25,7 @@ export default class AddRemoveLayout extends React.PureComponent {
 
     this.state = {
       items: [
-        {
-          id:"0",
-          layout: {
-            i: 0,
-            x: 0,
-            y: 0,
-            w: 2,
-            h: 1,
-          },
-          html: "<p> Start sending content for it to be shown here.</p>"
-        }
+        
       ]
     };
 
@@ -54,14 +38,19 @@ export default class AddRemoveLayout extends React.PureComponent {
   }
   createElement(item) {
     return (
-      <div key={item.id} data-grid={item.layout}>
-        <span dangerouslySetInnerHTML={{__html: item.html}} />
-        <span
-          className="remove"
-          onClick={this.onRemoveItem.bind(this, item.id)}
-        >
-          x
-        </span>
+
+      <div key={item.id} data-grid={item.layout} >
+      <Card  >
+        <CardContent style={{width: '100%', height: '100%'}}>
+          <div  style={{width: '100%', height: 'inherit'}} dangerouslySetInnerHTML={{__html: item.html}} />
+          <span
+            className="remove"
+            onClick={this.onRemoveItem.bind(this, item.id)}
+          >
+            
+            <i class="fa fa-close"></i>          </span>
+        </CardContent>
+      </Card>
       </div>
     );
   }
@@ -76,8 +65,10 @@ export default class AddRemoveLayout extends React.PureComponent {
           layout: {
             x: (this.state.items.length * 2) % (this.state.cols || 12),
             y: Infinity, // puts it at the bottom
-            w: 5,
-            h: 3
+            w: 10,
+            h: 10,
+            containerPadding:[0,0],
+            margin:[0,0]
           },
           html: html
         }),
@@ -118,6 +109,7 @@ export default class AddRemoveLayout extends React.PureComponent {
           onLayoutChange={this.onLayoutChange}
           onBreakpointChange={this.onBreakpointChange}
           {...this.props}
+          
         >
           {_.map(this.state.items, item => this.createElement(item))}
         </ResponsiveReactGridLayout>

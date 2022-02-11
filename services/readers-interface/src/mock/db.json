@@ -3,8 +3,28 @@
     "keyword": "RANDOM",
     "components": [
       {
-        "name": "div",
-        "url": "http://localhost:3000",
+        "name": "video player",
+        "url": "https://th.bing.com/th/id/R.59ca099c64db166fccc6471c1262f880?rik=BWrxEQFgW4NgRA&pid=ImgRaw&r=0",
+        "fileFormat": "IMAGE"
+      }
+    ]
+  },
+  {
+    "keyword": "RANDOM",
+    "components": [
+      {
+        "name": "video player",
+        "url": "http://localhost:3002/",
+        "fileFormat": "VIDEO"
+      }
+    ]
+  },
+  {
+    "keyword": "RANDOM",
+    "components": [
+      {
+        "name": "video player",
+        "url": "http://localhost:3000/",
         "fileFormat": "HTML"
       }
     ]

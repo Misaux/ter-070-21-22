@@ -10,6 +10,10 @@ export class DataRetriever {
     constructor(private httpService: HttpService) {}
 
     async getDataFromService(cmpDto: ComponentDTO){
-        return ( await firstValueFrom(this.httpService.get(cmpDto.url)) ).data;
+            await firstValueFrom(this.httpService.get(cmpDto.url))
+            .then(data =>{ 
+                return data})
+           return null
+            
     }
 }

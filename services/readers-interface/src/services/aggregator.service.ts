@@ -32,16 +32,21 @@ export class AggregatorService {
   
     async renderAggregate(entry:EntryPointDTO){
         let resultTags: string
-
+        try{
         resultTags = await this.aggregate(entry);
-
-        //Send data to the gateway for the front-end
-        console.log(resultTags);
-        const hmtlResDto: HtmlObjectDto = {
-        id: uuidv4(), //v4: Create a random unique uuid
-        html: resultTags,
+                //Send data to the gateway for the front-end
+                console.log(resultTags);
+                const hmtlResDto: HtmlObjectDto = {
+                id: uuidv4(), //v4: Create a random unique uuid
+                html: resultTags,
+                }
+                await this.gatewayWebSocket.render(hmtlResDto);
         }
-        await this.gatewayWebSocket.render(hmtlResDto);
+        catch(err){
+            console.error(err.message);
+            console.error("One of the frontends is inaccessible, try to change the url")
+        }
+
     }
 
     async renderMultiAggregate(entries: EntryPointDTO[]){
@@ -62,7 +67,6 @@ export class AggregatorService {
 
     async aggregate_generic(components: ComponentDTO[]): Promise<string>{
         let resultTags: string = '';
-
         //Create corresponding tags according to the format and strategy
         for(const elem of components){
             resultTags += ''
