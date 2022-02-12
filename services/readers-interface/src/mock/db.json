@@ -3,8 +3,28 @@
     "keyword": "RANDOM",
     "components": [
       {
-        "name": "video player",
-        "url": "https://th.bing.com/th/id/R.59ca099c64db166fccc6471c1262f880?rik=BWrxEQFgW4NgRA&pid=ImgRaw&r=0",
+        "name": "Page wiki polytech",
+        "url": "https://polytech.univ-cotedazur.fr/",
+        "fileFormat": "HTML"
+      }
+    ]
+  },
+  {
+    "keyword": "text_over_images",
+    "components": [
+      {
+        "name": "Légende",
+        "url": "http://localhost:3001/",
+        "fileFormat": "TEXT"
+      },
+      {
+        "name": "logo polytech",
+        "url": "https://th.bing.com/th/id/R.970db754bf82e038461012770717afd7?rik=U210SeZjZsyYIQ&riu=http%3a%2f%2fwww.geipi-polytech.org%2fsites%2fdefault%2ffiles%2fstyles%2flogos_page%2fpublic%2flogos%2fpolytech_nice_sophia_logo_carre.jpg%3fitok%3ddDte6GWu&ehk=zIp5pzCV6%2fuMkvQfjc6Di8Bm80l%2f9uoZ1aRRi4qKLgs%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
+        "fileFormat": "IMAGE"
+      },
+      {
+        "name": "logo unice",
+        "url": "https://th.bing.com/th/id/R.567bce4a26b6123bcc227ce7a1d5b64e?rik=qCothtOpPHyx8Q&pid=ImgRaw&r=0",
         "fileFormat": "IMAGE"
       }
     ]
@@ -13,8 +33,8 @@
     "keyword": "RANDOM",
     "components": [
       {
-        "name": "video player",
-        "url": "http://localhost:3002/",
+        "name": "Video présentation",
+        "url": "http://localhost:3002",
         "fileFormat": "VIDEO"
       }
     ]
@@ -23,9 +43,9 @@
     "keyword": "RANDOM",
     "components": [
       {
-        "name": "video player",
-        "url": "http://localhost:3000/",
-        "fileFormat": "HTML"
+        "name": "Video présentation",
+        "url": "https://youtu.be/dKE9LtsE23Y",
+        "fileFormat": "VIDEO"
       }
     ]
   }

@@ -13,6 +13,7 @@ import { PersistanceService } from './persistance.service';
 import { RenderGateway } from '../websocket/render.gateway';
 import { HtmlObjectDto } from '../dtos/html-object.dto';
 import { v4 as uuidv4 } from 'uuid' //Random uuid generator
+import { text } from 'node:stream/consumers';
 
 @Injectable()
 export class AggregatorService {
@@ -87,8 +88,7 @@ export class AggregatorService {
                     resultTags += this.readerVideoService.createTags(elem.url);
                     break;
                 case FileFormat.HTML:
-                    //var data = elem.url !== undefined ? await this.dataRetriever.getDataFromService(elem): elem.content;
-                    resultTags += this.readerHTMLService.createTags(await this.dataRetriever.getDataFromService(elem));
+                    resultTags += this.readerHTMLService.createTags(elem.url);
                     break;
             }
             resultTags += ''
@@ -112,19 +112,18 @@ export class AggregatorService {
     }
 
     async aggregate_text_over_images(components: ComponentDTO[]): Promise<string>{
-        let resultTags: string = '<div>';
+        let resultTags: string = '';
 
         //The text HAS to be the first one in the order of components
         let textTags: string = '<div>'+ (await this.dataRetriever.getDataFromService(components[0])) + '</div>';
 
         for(const elem of components){
             if(elem.fileFormat === FileFormat.IMAGE){ //Make sure we ignore components not being images
-                resultTags += this.readerImageService.createTags(await this.dataRetriever.getDataFromService(elem));
-                resultTags += textTags;
+                resultTags += this.readerImageService.createTags(elem.url);
             }
         }
 
-        resultTags += '</div>';
+        resultTags += textTags;
         return resultTags;
     }
 }

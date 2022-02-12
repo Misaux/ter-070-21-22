@@ -1,12 +1,9 @@
-body {
-  padding: 20px;
-}
+
 #content {
   width: 100%;
 }
 .react-grid-layout {
   background: #eee;
-  margin-top: 10px;
 }
 .layoutJSON {
   background: #ddd;
@@ -126,6 +123,8 @@ body {
   bottom: 3px;
   width: 5px;
   height: 5px;
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .react-resizable-hide > .react-resizable-handle {
@@ -183,7 +182,7 @@ body {
   bottom: 0;
   transform: rotate(45deg);
 }
-.css-bhp9pd-MuiPaper-root-MuiCard-root {
+.css-root {
   width: 100% !important;
   justify-content: center !important;
   overflow: auto !important;
@@ -194,13 +193,11 @@ body {
 }
 
 .img{
-  width: 100%;
-  height: 100%;
+  width: inherit;
 }
 
 #videoPlayer{
-  width: 100%;
-  height: 100%;
+  width: inherit;
 }
 *::-webkit-scrollbar {
   background-color:#fff;
@@ -242,5 +239,27 @@ body {
   right: 2px;
   top: 0;
   cursor: pointer;
-  color: rgba(5, 5, 5, 0.637);
+  color: rgba(0, 0, 0, 0);
+}
+
+.remove:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+iframe {
+  border-width: 0 !important;
+}
+
+.react-grid-dragHandleExample {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 5px;
+
 }
