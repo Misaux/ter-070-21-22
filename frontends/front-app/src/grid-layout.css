@@ -263,3 +263,18 @@ iframe {
   padding: 5px;
 
 }
+.tts {
+  color: #333333; font-family: Georgia, serif; font-size: 18px; line-height: 28px; margin: 0 0 28px;
+    box-shadow: 0 4px 4px  rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+    text-align: center;
+    width: 99%;
+    position: absolute;
+    top: 2%;
+    margin: auto
+
+}
+.tts:hover{
+  background-color: rgba(223, 221, 221, 0.377)
+}

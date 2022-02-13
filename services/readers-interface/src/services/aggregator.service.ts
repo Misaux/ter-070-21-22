@@ -38,7 +38,7 @@ export class AggregatorService {
                 //Send data to the gateway for the front-end
                 console.log(resultTags);
                 const hmtlResDto: HtmlObjectDto = {
-                id: uuidv4(), //v4: Create a random unique uuid
+                id: entry.id, //v4: Create a random unique uuid
                 html: resultTags,
                 }
                 await this.gatewayWebSocket.render(hmtlResDto);

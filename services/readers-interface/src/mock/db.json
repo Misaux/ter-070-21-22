@@ -1,5 +1,6 @@
 [
   {
+    "id": "page",
     "keyword": "RANDOM",
     "components": [
       {
@@ -10,6 +11,7 @@
     ]
   },
   {
+    "id": "images",
     "keyword": "text_over_images",
     "components": [
       {
@@ -23,29 +25,31 @@
         "fileFormat": "IMAGE"
       },
       {
-        "name": "logo unice",
-        "url": "https://th.bing.com/th/id/R.567bce4a26b6123bcc227ce7a1d5b64e?rik=qCothtOpPHyx8Q&pid=ImgRaw&r=0",
+        "name": "logo uca",
+        "url": "https://geoazur.oca.eu/images/GEOAZUR/Logos/UCA_logo.png",
         "fileFormat": "IMAGE"
       }
     ]
   },
   {
+    "id": "video",
     "keyword": "RANDOM",
     "components": [
       {
         "name": "Video présentation",
-        "url": "http://localhost:3002",
+        "url": "http://10.0.2.2:3002",
         "fileFormat": "VIDEO"
       }
     ]
   },
   {
+    "id": "tts",
     "keyword": "RANDOM",
     "components": [
       {
-        "name": "Video présentation",
-        "url": "https://youtu.be/dKE9LtsE23Y",
-        "fileFormat": "VIDEO"
+        "name": "tts",
+        "url": "http://localhost:3001/2",
+        "fileFormat": "TTS"
       }
     ]
   }

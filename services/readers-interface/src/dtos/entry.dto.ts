@@ -3,7 +3,10 @@ import { Type } from 'class-transformer';
 import { ComponentDTO } from './component.dto';
 
 export class EntryPointDTO{
-
+    @IsNotEmpty()
+    @IsString()
+    public id: string;
+    
     @IsNotEmpty()
     @IsString()
     public keyword: string;
