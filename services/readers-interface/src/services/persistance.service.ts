@@ -9,7 +9,6 @@ export class PersistanceService {
 
     readData(): EntryPointDTO[] {
         let json = readFileSync(this.filePath,"utf8");
-        console.log("ici")
         return json ===""?[]:JSON.parse(json);
     }
 
@@ -22,6 +21,11 @@ export class PersistanceService {
             if (err) throw err;
             console.log("New data added");
           });
+    }
+
+    checkId(data:EntryPointDTO): boolean {
+        var db = this.readData();
+         return db.find(item =>{ return item.id=== data.id}) === undefined;
     }
 
 }

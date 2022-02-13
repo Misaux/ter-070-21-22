@@ -13,6 +13,7 @@ import { PersistanceService } from './persistance.service';
 import { RenderGateway } from '../websocket/render.gateway';
 import { HtmlObjectDto } from '../dtos/html-object.dto';
 import { v4 as uuidv4 } from 'uuid' //Random uuid generator
+import { text } from 'node:stream/consumers';
 
 @Injectable()
 export class AggregatorService {
@@ -32,16 +33,21 @@ export class AggregatorService {
   
     async renderAggregate(entry:EntryPointDTO){
         let resultTags: string
-
+        try{
         resultTags = await this.aggregate(entry);
-
-        //Send data to the gateway for the front-end
-        console.log(resultTags);
-        const hmtlResDto: HtmlObjectDto = {
-        id: uuidv4(), //v4: Create a random unique uuid
-        html: resultTags,
+                //Send data to the gateway for the front-end
+                console.log(resultTags);
+                const hmtlResDto: HtmlObjectDto = {
+                id: entry.id, //v4: Create a random unique uuid
+                html: resultTags,
+                }
+                await this.gatewayWebSocket.render(hmtlResDto);
         }
-        await this.gatewayWebSocket.render(hmtlResDto);
+        catch(err){
+            console.error(err.message);
+            console.error("One of the frontends is inaccessible, try to change the url")
+        }
+
     }
 
     async renderMultiAggregate(entries: EntryPointDTO[]){
@@ -62,10 +68,9 @@ export class AggregatorService {
 
     async aggregate_generic(components: ComponentDTO[]): Promise<string>{
         let resultTags: string = '';
-
         //Create corresponding tags according to the format and strategy
         for(const elem of components){
-            resultTags += '<div>'
+            resultTags += ''
             switch (elem.fileFormat){
                 case FileFormat.TEXT:
                     resultTags += this.readerTextService.createTags(await this.dataRetriever.getDataFromService(elem));
@@ -74,7 +79,7 @@ export class AggregatorService {
                     resultTags += this.readerTTSService.createTags(await this.dataRetriever.getDataFromService(elem));
                     break;
                 case FileFormat.IMAGE:
-                    resultTags += this.readerImageService.createTags(await this.dataRetriever.getDataFromService(elem));
+                    resultTags += this.readerImageService.createTags(elem.url);
                     break;
                 case FileFormat.AUDIO:
                     resultTags += this.readerAudioService.createTags(elem.url);
@@ -83,11 +88,10 @@ export class AggregatorService {
                     resultTags += this.readerVideoService.createTags(elem.url);
                     break;
                 case FileFormat.HTML:
-                    //var data = elem.url !== undefined ? await this.dataRetriever.getDataFromService(elem): elem.content;
-                    resultTags += this.readerHTMLService.createTags(await this.dataRetriever.getDataFromService(elem));
+                    resultTags += this.readerHTMLService.createTags(elem.url);
                     break;
             }
-            resultTags += '</div>'
+            resultTags += ''
         }
 
         return resultTags;
@@ -108,19 +112,18 @@ export class AggregatorService {
     }
 
     async aggregate_text_over_images(components: ComponentDTO[]): Promise<string>{
-        let resultTags: string = '<div>';
+        let resultTags: string = '';
 
         //The text HAS to be the first one in the order of components
         let textTags: string = '<div>'+ (await this.dataRetriever.getDataFromService(components[0])) + '</div>';
 
         for(const elem of components){
             if(elem.fileFormat === FileFormat.IMAGE){ //Make sure we ignore components not being images
-                resultTags += this.readerImageService.createTags(await this.dataRetriever.getDataFromService(elem));
-                resultTags += textTags;
+                resultTags += this.readerImageService.createTags(elem.url);
             }
         }
 
-        resultTags += '</div>';
+        resultTags += textTags;
         return resultTags;
     }
 }

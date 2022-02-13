@@ -11,5 +11,7 @@ export class DataRetriever {
 
     async getDataFromService(cmpDto: ComponentDTO){
         return ( await firstValueFrom(this.httpService.get(cmpDto.url)) ).data;
+
+            
     }
 }

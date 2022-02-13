@@ -21,9 +21,13 @@ export class ReadersController {
 
   @Post('/new')
   async getConfigFromUser(@Body() request: EntryPointDTO) {
-    this.persistenceService.addData(request);
-
-    await this.aggregatorService.renderAggregate(request)
+    if(this.persistenceService.checkId(request)){
+      this.persistenceService.addData(request);
+      await this.aggregatorService.renderAggregate(request)
+    }
+    else{
+      console.error("Id already exists");
+    }
   }
 
   @Post()
