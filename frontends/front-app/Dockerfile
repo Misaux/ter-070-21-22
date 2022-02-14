@@ -12,8 +12,7 @@ RUN npm install -g serve
 
 #Copy full content
 COPY . .
-ARG REACT_APP_API_URL
-ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 #Build the production app
 RUN npm run build
 

@@ -5,7 +5,7 @@ import { join } from 'path';
 
 @Injectable()
 export class AppService {
-  getVideo( request: Request, response: Response){
+  getVideo( request: Request, response: Response, title){
     try {
       const range = request.headers.range
       if (!range) {
@@ -13,7 +13,7 @@ export class AppService {
       }
       else{
         const parts = range.substr(6).split('-')
-        const path = join(process.cwd(), 'assets/Présentation-PNS-2020.mp4')
+        const path = join(process.cwd(), 'assets/'+title)
         const size =  statSync(path).size;  
         const start = parseInt(parts[0], 10)
         const end = parts[1]

@@ -1,5 +1,5 @@
 [
-  {
+   {
     "id": "page",
     "keyword": "RANDOM",
     "components": [
@@ -7,6 +7,17 @@
         "name": "Page wiki polytech",
         "url": "https://polytech.univ-cotedazur.fr/",
         "fileFormat": "HTML"
+      }
+    ]
+  },
+  {
+    "id": "tts",
+    "keyword": "RANDOM",
+    "components": [
+      {
+        "name": "tts",
+        "url": "http://localhost:3001/2",
+        "fileFormat": "TTS"
       }
     ]
   },
@@ -37,19 +48,8 @@
     "components": [
       {
         "name": "Video présentation",
-        "url": "http://10.0.2.2:3002",
+        "url": "http://localhost:3003/Présentation-PNS-2020.mp4",
         "fileFormat": "VIDEO"
-      }
-    ]
-  },
-  {
-    "id": "tts",
-    "keyword": "RANDOM",
-    "components": [
-      {
-        "name": "tts",
-        "url": "http://localhost:3001/2",
-        "fileFormat": "TTS"
       }
     ]
   }

@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Controller, Get, Param, Req, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Response,Request } from 'express'
 
@@ -6,9 +6,10 @@ import { Response,Request } from 'express'
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @Get(":title")
   getVideo(@Req() request: Request,
-  @Res() response: Response,) {
-    this.appService.getVideo(request, response);
+  @Res() response: Response,
+  @Param("title") title) {
+    this.appService.getVideo(request, response, title);
   }
 }
