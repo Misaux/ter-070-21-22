@@ -27,8 +27,9 @@ Lancer les serveurs
 ````
 
 ## Utilisation
-Notre api est accessible sur l'url http://localhost:3010
-Afin de rajouter un nouveau composant, former une requête avec un message JSON a l'adresse suivante http://localhost:3010/new
+### App web
+Notre api est accessible sur l'url http://localhost:3010. </br>
+Afin de rajouter un nouveau composant, former une requête avec un message JSON a l'adresse suivante http://localhost:3010/new. </br>
 Le message doit avoir la structure suivante : 
 ````json
 {
@@ -79,3 +80,36 @@ Les fonctionnalités suivantes n'ont pas été introduite dans l'app native :
 *	Drag and Drop
 *	Resize
 *   TTS
+
+## Exemples
+
+En lançant notre docker-compose, quelques micro-services et micro-frontends tournerons afin de tester l'app.
+
+````shell
+docker-compose build
+docker-compose up -d
+`````
+micro-frontends:
+* exemple(localhost:4000):
+  * retourne un texte + video + audio
+* exemple-bis (localhost:4001)
+  * retourne un texte
+* map (localhost:4002)
+  * retourne une carte
+
+micro-service:
+* exemple(localhost:3000):
+  * / -> retourne une string "hello"
+  * /video -> retourne un lien video
+  * /audio -> retourne un lien audio
+* exemple-bis(localhost:3001)
+  * / -> retourne une string "légende"
+  * /2 -> retourne une string "bienvenue"
+* html-provider(localhost:3002)
+  * / -> retourne une page html NestJS
+* video-provider(localhost:3003)
+  * /{titre} -> retourne un stream vidéo selon le titre (la video doit être présente dans le repertoire assets de services/video-provider)
+* audio-provider(localhost:3004)
+  * /{titre} -> retourne un stream audio selon le titre (l'audio doit être présent dans le repertoire assets de services/video-provider)
+
+
