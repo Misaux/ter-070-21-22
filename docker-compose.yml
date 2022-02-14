@@ -1,0 +1,120 @@
+version: "3.8"
+
+services:
+  # Service Example
+  back-example:
+    build: services/example
+    container_name: back-example
+    env_file:
+      - .env
+    environment:
+      - PORT=${BACK_EXAMPLE_PORT}
+    ports:
+      - "${BACK_EXAMPLE_PORT}:${BACK_EXAMPLE_PORT}"
+    restart: unless-stopped
+    networks:
+      - example-network
+  # Frontend Example
+  front-example:
+    build: 
+      context: frontends/example
+      args:
+        REACT_APP_API_URL: http://localhost:${BACK_EXAMPLE_PORT}/
+    container_name: front-example
+    env_file:
+      - .env
+    environment:
+      - PORT=${FRONT_EXAMPLE_PORT}
+    ports:
+      - "${FRONT_EXAMPLE_PORT}:${FRONT_EXAMPLE_PORT}"
+    depends_on:
+      - back-example
+    restart: unless-stopped
+    networks:
+      - example-network
+  # Service Example-bis
+  back-example-bis:
+    build: services/example-bis
+    container_name: back-example-bis
+    env_file:
+      - .env
+    environment:
+      - PORT=${BACK_EXAMPLE_BIS_PORT}
+    ports:
+      - "${BACK_EXAMPLE_BIS_PORT}:${BACK_EXAMPLE_BIS_PORT}"
+    restart: unless-stopped
+    networks:
+      - example-network
+  # Frontend Example-bis
+  front-example-bis:
+    build: 
+      context: frontends/example-bis
+      args:
+        REACT_APP_API_URL: http://localhost:${BACK_EXAMPLE_BIS_PORT}/
+    container_name: front-example-bis
+    env_file:
+      - .env      
+    environment:
+      - PORT=${FRONT_EXAMPLE_BIS_PORT}
+    ports:
+      - "${FRONT_EXAMPLE_BIS_PORT}:${FRONT_EXAMPLE_BIS_PORT}"
+    depends_on:
+      - back-example-bis
+    restart: unless-stopped
+    networks:
+      - example-network
+   # Frontend map
+  map:
+    container_name: map
+    build: frontends/map
+    env_file:
+      - .env      
+    environment:
+      - PORT=${FRONT_MAP}
+    ports:
+      - "${FRONT_MAP}:${FRONT_MAP}"
+    restart: unless-stopped
+    networks:
+      - example-network
+  # Backend html
+  html:
+    container_name: html
+    build: services/html-provider
+    env_file:
+      - .env      
+    environment:
+      - PORT=${BACK_HTML}
+    ports:
+      - "${BACK_HTML}:${BACK_HTML}"
+    restart: unless-stopped
+    networks:
+      - example-network  
+  # Backend video
+  video:
+    container_name: video
+    build: services/video-provider
+    env_file:
+      - .env      
+    environment:
+      - PORT=${BACK_VIDEO}
+    ports:
+      - "${BACK_VIDEO}:${BACK_VIDEO}"
+    restart: unless-stopped
+    networks:
+      - example-network  
+  # Backend audio
+  audio:
+    container_name: audio
+    build: services/audio-provider
+    env_file:
+      - .env      
+    environment:
+      - PORT=${BACK_AUDIO}
+    ports:
+      - "${BACK_AUDIO}:${BACK_AUDIO}"
+    restart: unless-stopped
+    networks:
+      - example-network
+networks:
+  example-network:
+    driver: bridge
