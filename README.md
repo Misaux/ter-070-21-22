@@ -45,12 +45,12 @@ Le message doit avoir la structure suivante :
     ]
   }
 ````
-Les stratégies de merge disponible sont :
+Les stratégies de merge disponibles à renseigner dans le champ `keyword` sont :
 * RANDOM (stratégie order matters)
 * merge_texts (uniquement pour des données textes)
 * text_over_images (le composant text doit être premier dans la liste des composants, les autres sont des images )
 
-Les types de données supportées sont:
+Les types de données supportées à renseigner dans le champ `fileFormat` sont:
 * TEXT (url -> route renvoyant un text)
 * IMAGE (url -> lien vers l'image)
 * VIDEO (url -> route vers un serveur renvoyant un stream vidéo)
@@ -58,13 +58,13 @@ Les types de données supportées sont:
 * TTS (text to speech, url -> route renvoyant un text)
 * HTML (url -> lien vers un site web ou vers un serveur renvoyant un html)
 
-Le front-global de l'app est disponible sur http://localhost:4010
+Le front-global de l'app est disponible sur http://localhost:4010.
 
 Il est possible de déplacer les composants avec la souris, de les changer de taille en cliquant en bas à droite, ou de les supprimer en haut à droite.
 
 Vous pouvez également modifier, supprimer, ajouter des composants ainsi que leurs données directement depuis le fichier db.json (chemin: services/readers-interface/src/mock/)
 
-L'application web est responsive et fonctionne ainsi sur mobile. 
+L'application web est responsive et fonctionne ainsi sur des écrans de différentes tailles (mobile, tablette, ...). 
 
 ### App mobile
 
@@ -74,6 +74,7 @@ Lancer le back séparément en lançant le run.sh situé [ici](services\readers-
 
 Afin de lancer l'application mobile suivez les instructions de [React-Native].(https://reactnative.dev/docs/environment-setup)
 Et éxecuter la commande suivante dans le repo frontends\FrontAppNative
+
 ````shell
 npx react-native run-android
 ````
@@ -84,7 +85,7 @@ Les fonctionnalités suivantes n'ont pas été introduite dans l'app native :
 
 ## Exemples
 
-En lançant notre docker-compose, quelques micro-services et micro-frontends tournerons afin de tester l'app.
+En lançant notre docker-compose, quelques micro-services et micro-frontends tourneront afin de tester l'application.
 
 ````shell
 docker-compose build
