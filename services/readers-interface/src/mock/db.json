@@ -1,17 +1,27 @@
 [
-   {
-    "id": "page",
-    "keyword": "RANDOM",
+  {
+    "id": "images",
+    "keyword": "text_over_images",
     "components": [
       {
-        "name": "Page wiki polytech",
-        "url": "https://polytech.univ-cotedazur.fr/",
-        "fileFormat": "HTML"
+        "name": "Légende",
+        "url": "http://localhost:3001",
+        "fileFormat": "TEXT"
+      },
+      {
+        "name": "Logo Polytech",
+        "url": "https://th.bing.com/th/id/R.970db754bf82e038461012770717afd7?rik=U210SeZjZsyYIQ&riu=http%3a%2f%2fwww.geipi-polytech.org%2fsites%2fdefault%2ffiles%2fstyles%2flogos_page%2fpublic%2flogos%2fpolytech_nice_sophia_logo_carre.jpg%3fitok%3ddDte6GWu&ehk=zIp5pzCV6%2fuMkvQfjc6Di8Bm80l%2f9uoZ1aRRi4qKLgs%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
+        "fileFormat": "IMAGE"
+      },
+      {
+        "name": "Logo UCA",
+        "url": "https://geoazur.oca.eu/images/GEOAZUR/Logos/UCA_logo.png",
+        "fileFormat": "IMAGE"
       }
     ]
   },
   {
-    "id": "tts",
+    "id": "bienvenue",
     "keyword": "RANDOM",
     "components": [
       {
@@ -22,23 +32,13 @@
     ]
   },
   {
-    "id": "images",
-    "keyword": "text_over_images",
+    "id": "page",
+    "keyword": "RANDOM",
     "components": [
       {
-        "name": "Légende",
-        "url": "http://localhost:3001/",
-        "fileFormat": "TEXT"
-      },
-      {
-        "name": "logo polytech",
-        "url": "https://th.bing.com/th/id/R.970db754bf82e038461012770717afd7?rik=U210SeZjZsyYIQ&riu=http%3a%2f%2fwww.geipi-polytech.org%2fsites%2fdefault%2ffiles%2fstyles%2flogos_page%2fpublic%2flogos%2fpolytech_nice_sophia_logo_carre.jpg%3fitok%3ddDte6GWu&ehk=zIp5pzCV6%2fuMkvQfjc6Di8Bm80l%2f9uoZ1aRRi4qKLgs%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
-        "fileFormat": "IMAGE"
-      },
-      {
-        "name": "logo uca",
-        "url": "https://geoazur.oca.eu/images/GEOAZUR/Logos/UCA_logo.png",
-        "fileFormat": "IMAGE"
+        "name": "Page accueil polytech",
+        "url": "https://polytech.univ-cotedazur.fr/",
+        "fileFormat": "HTML"
       }
     ]
   },

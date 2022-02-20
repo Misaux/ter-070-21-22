@@ -1,7 +1,7 @@
 import socketIOClient  from 'socket.io-client';
 import React, { useState, useEffect } from "react";
 import DynamicComponent from "./DynamicComponent";
-import type {Node} from 'react';
+import  {Node} from 'react';
 import {
   StyleSheet,
   ScrollView
@@ -12,7 +12,7 @@ const createComponent = (data) => {
   return React.createElement(DynamicComponent,props);
 }
 
-const WebSocket: () => Node = () => {
+const WebSocket = () => {
     const [components, setComponents] = useState([]);
 
 
@@ -22,6 +22,7 @@ const WebSocket: () => Node = () => {
         setComponents(c => c.concat([createComponent(data)]));
         console.log(data);
       });
+      socket.emit("refresh",null);
       return () => socket.disconnect();
 
     }, []);
