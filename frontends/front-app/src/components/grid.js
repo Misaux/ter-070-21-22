@@ -32,8 +32,8 @@ export default class AddRemoveLayout extends React.PureComponent {
     this.isResizing = false;
     this.addItem = this.addItem.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
-    let port = process.env.REACT_APP_WEBSOCKET_PORT || 3010
-    let host = process.env.REACT_APP_WEBSOCKET_HOST || window.location.hostname
+    let port = 3010
+    let host = window.location.hostname
     this.socket = socketIOClient(`http://${host}:${port}`);
   }
 
