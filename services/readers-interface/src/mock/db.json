@@ -21,17 +21,6 @@
     ]
   },
   {
-    "id": "bienvenue",
-    "keyword": "RANDOM",
-    "components": [
-      {
-        "name": "tts",
-        "url": "http://localhost:3001/2",
-        "fileFormat": "TTS"
-      }
-    ]
-  },
-  {
     "id": "page",
     "keyword": "RANDOM",
     "components": [
@@ -50,6 +39,18 @@
         "name": "Video présentation",
         "url": "http://localhost:3003/Présentation-PNS-2020.mp4",
         "fileFormat": "VIDEO"
+      }
+    ]
+  }
+  ,
+  {
+    "id": "bienvenue",
+    "keyword": "RANDOM",
+    "components": [
+      {
+        "name": "tts",
+        "url": "http://localhost:3001/2",
+        "fileFormat": "TTS"
       }
     ]
   }

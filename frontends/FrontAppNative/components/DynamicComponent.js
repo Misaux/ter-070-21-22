@@ -1,21 +1,35 @@
 import React, { useState } from "react";
-import {WebView} from 'react-native-webview';
+import AutoHeightWebView from 'react-native-autoheight-webview'
+import { Dimensions } from 'react-native'
 import {
-  View
+  StyleSheet,
+  ScrollView
 } from 'react-native';
-import type {Node} from 'react';
-
-const DynamicComponent= ({htmlContent: initialHtmlContent}): Node =>{
+const DynamicComponent= ({htmlContent: initialHtmlContent})=>{
     const htmlContent = useState(initialHtmlContent);
-    console.log(htmlContent);
-    console.log(initialHtmlContent);
 
-  return ( <View style={{ height: 200 }}>
-    <WebView
-    originWhitelist={['*']}
-    source={{ html: htmlContent[0] }}
-  /></View>
-  );
+
+
+
+      return ( 
+        <AutoHeightWebView 
+        customStyle={`
+      * {
+        height: 100%;
+      }
+    `}    style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}
+        contentContainerStyle={{flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center'}} 
+        originWhitelist={['*']}
+        source={{html:htmlContent[0]}} 
+        startInLoadingState={true}
+        scrollEnabled={true}
+        viewportContent={'width=device-width'}
+
+        />
+      );
 }
 
 export default DynamicComponent;

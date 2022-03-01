@@ -27,7 +27,10 @@ const WebSocket = () => {
 
     }, []);
 
-  return <ScrollView >
+  return <ScrollView contentContainerStyle={{flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'}} >
   {components}
   </ScrollView>
 }

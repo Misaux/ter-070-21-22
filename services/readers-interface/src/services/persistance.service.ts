@@ -22,6 +22,18 @@ export class PersistanceService {
             console.log("New data added");
           });
     }
+    deleteData(request:{id:string}) {
+        var db = this.readData();
+        const toRemove = db.findIndex( (d)=> d.id === request.id);
+        if(toRemove!=null && toRemove!=undefined)
+            db.splice(toRemove, 1);
+        var newData = JSON.stringify(db, null, 2);
+        writeFile(this.filePath, newData, (err) => {
+            // Error checking
+            if (err) throw err;
+            console.log("New data added");
+          });
+    }
 
     checkId(data:EntryPointDTO): boolean {
         var db = this.readData();

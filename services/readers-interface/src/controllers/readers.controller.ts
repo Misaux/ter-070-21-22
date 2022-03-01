@@ -14,9 +14,13 @@ export class ReadersController {
 
   ) {}
 
-  @Get()
-  getNull(): string {
-        return null;
+  @Post('/render')
+  async render() {
+    this.aggregatorService.renderMultiAggregate(this.persistenceService.readData());
+  }
+  @Post('/delete')
+  async delete(@Body() request:{id:string}) {
+    this.persistenceService.deleteData(request);
   }
 
   @Post('/new')
