@@ -69,7 +69,7 @@ L'application web est responsive et fonctionne ainsi sur des écrans de différe
 ### App mobile
 
 Notre application possède également une version mobile native.
-Lancer le back séparément en lançant le run.sh situé [ici](services\readers-interface)
+Lancer le back séparément en lançant le run.sh situé [ici](services/readers-interface)
 
 
 Afin de lancer l'application mobile suivez les instructions de [React-Native].(https://reactnative.dev/docs/environment-setup)
